@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MedDok Ai</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+         body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #e3f2fd; /* Light blue default */
+            color: #343a40; /* Dark gray text default */
+             transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            background-color: #000000; /* Black when dark mode */
+            color: #ffffff; /* White text when dark mode */
+        }
+
+        .navbar {
+            background-color: transparent !important;
+             color: #343a40 !important; /* Dark gray text default */
+             transition: background-color 0.3s, color 0.3s;
+        }
+
+        .light-mode .navbar {
+             color: white !important; /* White text when dark mode */
+        }
+
+         .navbar-brand, .nav-link {
+            color: #343a40 !important; /* Dark gray text default */
+             transition: background-color 0.3s, color 0.3s;
+        }
+
+         .light-mode .navbar-brand, .light-mode .nav-link {
+             color: #ffffff !important; /* White text when dark mode */
+        }
+
+        .navbar-brand {
+             font-weight: bold;
+             font-size: 1.5rem;
+        }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+          #hero {
+             display: flex;
+            flex-direction: column;
+             align-items: center;
+             padding: 40px 0;
+            text-align: center;
+             margin-top: 70px;
+            transition: background-color 0.3s, color 0.3s;
+         }
+
+        .light-mode #hero {
+            background-color: #000000; /* Black when dark mode */
+        }
+
+         #hero h1 {
+            font-size: 2.5rem;
+             font-weight: bold;
+           margin-bottom: 10px;
+         }
+
+         #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+         }
+
+        .chat-input-container {
+             display: flex;
+            align-items: center;
+             width: 80%;
+            max-width: 600px;
+             gap: 10px;
+           margin-bottom: 20px;
+        }
+
+         .chat-input-container input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #90caf9;
+           border-radius: 5px;
+             color: #343a40;
+            transition: border-color 0.3s ease;
+            background-color: #e3f2fd;
+
+        }
+
+         .light-mode .chat-input-container input[type="text"] {
+             background-color: #333; /* Dark grey when dark mode*/
+             color: white;
+        }
+
+         .chat-input-container button {
+            padding: 12px 25px;
+             border: none;
+            border-radius: 5px;
+             background: #1e88e5;
+            color: white;
+             font-weight: bold;
+             transition: all 0.3s ease-in-out;
+            cursor: pointer;
+         }
+
+         .chat-input-container button:hover {
+             background: #1565c0;
+         }
+
+        .result-buttons {
+            display: flex;
+             flex-wrap: wrap;
+           justify-content: center;
+             gap: 10px;
+           margin-bottom: 20px;
+         }
+
+        .result-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+             background: #1e88e5;
+            color: white;
+           font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 5px;
+         }
+
+         .result-buttons button:hover {
+            background: #1565c0;
+        }
+
+         .result-section {
+            transition: background-color 0.3s, color 0.3s;
+           background-color: transparent;
+             padding: 50px 0;
+            margin-top: 20px;
+        }
+
+         .light-mode .result-section {
+           background-color: #000000; /* Black when dark mode */
+        }
+
+        .card {
+            background: #ffffff;
+           border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, background-color 0.3s, color 0.3s;
+         }
+
+         .light-mode .card {
+             background: #333; /* Dark grey card when dark mode*/
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+         .card:hover {
+           transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #343a40;
+             font-weight: bold;
+           margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s;
+         }
+
+        .light-mode .card h3{
+             color: #ffffff;  /* White text when dark mode*/
+        }
+
+         .card ul {
+            list-style-type: none;
+           padding-left: 0;
+         }
+
+         .card ul li {
+            padding: 8px 0;
+            display: flex;
+             align-items: center;
+         }
+
+         .card ul li i {
+            margin-right: 10px;
+            color: #1e88e5;
+            font-size: 1.2rem;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+         }
+
+        .icon-container i {
+            font-size: 2.0rem;
+            cursor: pointer;
+             transition: all 0.2s ease;
+         }
+
+        .icon-container i:hover {
+             transform: scale(1.2);
+         }
+
+        .icon-container i:nth-child(1){color: #ffb300}
+        .icon-container i:nth-child(2){color: #4fc3f7}
+        .icon-container i:nth-child(3){color: #9fa8da}
+         .icon-container i:nth-child(4){color: #ef9a9a}
+         .icon-container i:nth-child(5){color: #a5d6a7}
+        .icon-container i:nth-child(6){color: #fff59d}
+
+         .modal-header {
+             background: #ffffff;
+             color: #343a40;
+             transition: background-color 0.3s, color 0.3s;
+         }
+
+        .light-mode .modal-header {
+             background: #333;  /* Dark grey text when dark mode*/
+             color: white;
+         }
+
+        .modal-body {
+             background: #ffffff;
+             color: #343a40;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .light-mode .modal-body {
+             background: #333;  /* Dark grey text when dark mode*/
+            color: #ffffff;
+        }
+
+        .theme-toggle {
+            position: fixed;
+             top: 20px;
+           right: 20px;
+            display: flex;
+             align-items: center;
+             z-index: 10000;
+        }
+
+        .theme-toggle label {
+             margin-right: 10px;
+           color: #343a40; /* Dark grey text default */
+            transition: background-color 0.3s, color 0.3s;
+         }
+
+        .light-mode .theme-toggle label {
+             color: white; /* White text when dark mode */
+        }
+
+        .theme-toggle button {
+            padding: 5px 10px;
+            border: none;
+             border-radius: 5px;
+            background: #1e88e5;
+            color: white;
+             cursor: pointer;
+             transition: background-color 0.3s;
+        }
+
+         .theme-toggle button:hover {
+            background: #1565c0;
+         }
+
+         #transcription {
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
+
+
+        #prediction-text {
+            font-size: 2.5rem;
+             font-weight: bold;
+             color: #1e88e5;
+             opacity: 0;
+             transition: opacity 0.5s ease;
+             text-align: center;
+            margin-bottom: 20px;
+             margin-top: 20px;
+        }
+
+         #prediction-text.show {
+            opacity: 1;
+         }
+    </style>
+</head>
+<body>
+     <div class="theme-toggle">
+         <label for="theme-toggle-checkbox">Theme:</label>
+         <button id="theme-toggle-button">
+             <i class="fas fa-sun"></i>
+        </button>
+     </div>
+     <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+           <a class="navbar-brand" href="/">AI Health Assistant</a>
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                   aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+           <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                   <li class="nav-item">
+                       <a class="nav-link active" href="../index2.html">Home</a>
+                   </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="/developer">Developer</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="/blog">Blog</a>
+                  </li>
+              </ul>
+          </div>
+       </div>
+     </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+         <h1>Your Personal AI Health Assistant</h1>
+        <p>Enter your symptoms below, and our AI will provide personalized health insights.</p>
+        <div id="prediction-text"></div>
+        <div class="chat-input-container">
+            <form action="/predict" method="post" style="display: flex; align-items: center; gap:10px; width: 100%;">
+                 <input type="text" id="symptoms" name="symptoms" placeholder="Enter your symptoms here">
+                <button type="submit" onclick="showPredictionText()">Predict</button>
+             </form>
+         </div>
+         <div id="transcription"></div>
+           <button type="button" id="startSpeechRecognition" class="btn btn-primary" style="margin: 15px 0px; padding: 5px 10px;">
+             Start Speech Recognition <i class="fas fa-microphone"></i>
+           </button>
+    </section>
+
+     <!-- Results Section -->
+   {% if predicted_disease %}
+   <section class="result-section">
+         <div class="container">
+            <div class="result-buttons">
+                 <button data-bs-toggle="modal" data-bs-target="#diseaseModal">Disease</button>
+                 <button data-bs-toggle="modal" data-bs-target="#descriptionModal">Description</button>
+                <button data-bs-toggle="modal" data-bs-target="#precautionModal">Precaution</button>
+                 <button data-bs-toggle="modal" data-bs-target="#medicationsModal">Medications</button>
+                 <button data-bs-toggle="modal" data-bs-target="#workoutsModal">Workouts</button>
+                 <button data-bs-toggle="modal" data-bs-target="#dietsModal">Diets</button>
+            </div>
+              <div class="row">
+                  <div class="col-md-6">
+                       <div class="card">
+                           <h3><i class="fas fa-dumbbell"></i> Workouts</h3>
+                             <ul>
+                            {% for i in workout %}
+                                 <li> <i class="fas fa-running"></i>{{ i }}</li>
+                             {% endfor %}
+                             </ul>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-heartbeat"></i> Predicted Disease</h3>
+                           <p>{{ predicted_disease }}</p>
+                       </div>
+                       <div class="card">
+                            <h3><i class="fas fa-file-alt"></i> Description</h3>
+                           <p>{{ dis_des }}</p>
+                        </div>
+                   </div>
+                   <div class="col-md-6">
+
+                       <div class="card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Precautions</h3>
+                             <ul>
+                                 {% for i in my_precautions %}
+                                     <li> <i class="fas fa-check-circle"></i>{{ i }}</li>
+                                 {% endfor %}
+                             </ul>
+                       </div>
+                       <div class="card">
+                            <h3><i class="fas fa-capsules"></i> Medications</h3>
+                             <ul>
+                                 {% for i in medications %}
+                                     <li><i class="fas fa-pills"></i> {{ i }}</li>
+                                 {% endfor %}
+                            </ul>
+                        </div>
+                         <div class="card">
+                            <h3> <i class="fas fa-apple-alt"></i> Diets</h3>
+                             <ul>
+                                 {% for i in my_diet %}
+                                      <li><i class="fas fa-utensils"></i> {{ i }}</li>
+                                 {% endfor %}
+                            </ul>
+                         </div>
+
+                   </div>
+               </div>
+         </div>
+    </section>
+    {% endif %}
+
+    <!-- Disease Modal -->
+     <div class="modal fade" id="diseaseModal" tabindex="-1" aria-labelledby="diseaseModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="diseaseModalLabel">Predicted Disease</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                    <p>{{ predicted_disease }}</p>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description Modal -->
+    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <p>{{ dis_des }}</p>
+                </div>
+            </div>
+       </div>
+   </div>
+
+    <!-- Precaution Modal -->
+    <div class="modal fade" id="precautionModal" tabindex="-1" aria-labelledby="precautionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                   <h5 class="modal-title" id="precautionModalLabel">Precaution</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+                <div class="modal-body">
+                    <ul>
+                       {% for i in my_precautions %}
+                             <li> <i class="fas fa-check-circle"></i>{{ i }}</li>
+                        {% endfor %}
+                   </ul>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Medications Modal -->
+    <div class="modal fade" id="medicationsModal" tabindex="-1" aria-labelledby="medicationsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="medicationsModalLabel">Medications</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                   <ul>
+                      {% for i in medications %}
+                           <li><i class="fas fa-pills"></i> {{ i }}</li>
+                      {% endfor %}
+                  </ul>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workouts Modal -->
+     <div class="modal fade" id="workoutsModal" tabindex="-1" aria-labelledby="workoutsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workoutsModalLabel">Workouts</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                    <ul>
+                      {% for i in workout %}
+                         <li> <i class="fas fa-running"></i>{{ i }}</li>
+                      {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diets Modal -->
+    <div class="modal fade" id="dietsModal" tabindex="-1" aria-labelledby="dietsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dietsModalLabel">Diets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+               <div class="modal-body">
+                    <ul>
+                      {% for i in my_diet %}
+                           <li><i class="fas fa-utensils"></i> {{ i }}</li>
+                      {% endfor %}
+                  </ul>
+               </div>
+           </div>
+        </div>
+    </div>
+    <script>
+         const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');
+         const transcriptionDiv = document.getElementById('transcription');
+
+         startSpeechRecognitionButton.addEventListener('click', startSpeechRecognition);
+
+        function startSpeechRecognition() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+
+             recognition.onresult = function (event) {
+                const result = event.results[0][0].transcript;
+                transcriptionDiv.textContent = result;
+           };
+
+             recognition.onend = function () {
+                console.log('Speech recognition ended.');
+           };
+
+             recognition.start();
+        }
+    </script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle-button');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+             if (body.classList.contains('light-mode')) {
+                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+             }
+       });
+    </script>
+    <script>
+        function showPredictionText() {
+            const predictionText = document.getElementById('prediction-text');
+             predictionText.textContent = "Here is Your Prediction!";
+            predictionText.classList.add('show');
+
+            setTimeout(() => {
+                predictionText.classList.remove('show');
+             }, 2000);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+</body>
+</html>

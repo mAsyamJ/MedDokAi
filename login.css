@@ -1,0 +1,196 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* Reset and basic settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ==============================
+   GENERAL STYLES FOR BODY AND MAIN CONTAINER
+   ============================== */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Needed for absolutely positioned pseudo-element */
+    background-image: url('assets/img/hero-carousel/hero-carousel-1.jpg'); /* Your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(74, 20, 140, 0.7), rgba(38, 166, 154, 0.7)); /* Gradient with transparency*/
+    z-index: 0; /* Ensure the gradient is over the image */
+}
+
+.main-container{
+    /*
+    if you want to control the width of the form, add a max width here
+    Example: max-width: 1200px
+    */
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
+/* ==============================
+   WRAPPER (MAIN FORM CONTAINER)
+   ============================== */
+.wrapper {
+  position: relative; /* Needed for absolute positioning of the login form */
+  max-width: 470px; /* Max width of the form container */
+  width: 100%; /* Take full width of the parent container */
+  border-radius: 12px; /* Rounded corners */
+  padding: 20px 30px 120px; /* Add padding */
+  background: #4070f4; /* Background color of main form */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+  overflow: hidden; /* Hide overflow content */
+}
+
+/* ==============================
+   LOGIN FORM
+   ============================== */
+.form.login {
+  position: absolute; /* Position absolutely within the wrapper */
+  left: 50%; /* Start at the center horizontally */
+  bottom: -86%; /* Start below the view */
+  transform: translateX(-50%); /* Center horizontally based on element size */
+  width: calc(100% + 220px); /* Larger width to create a circular effect when active */
+  padding: 20px 140px; /* Adjust padding */
+  border-radius: 50%; /* Create a circle */
+  height: 100%;
+  background: #fff; /* White background */
+  transition: all 0.6s ease; /* Animation transition on the form */
+}
+
+/* Styling when wrapper has the "active" class for when the login form is focused*/
+.wrapper.active .form.login {
+  bottom: -15%; /* Move up a bit */
+  border-radius: 35%; /* make a more oval shape */
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+/* ==============================
+   FORM HEADERS
+   ============================== */
+
+.form header {
+  font-size: 30px; /* Text size */
+  text-align: center; /* Center text */
+  color: #fff; /* Header text color */
+  font-weight: 600; /* Bold weight*/
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Header for login form */
+.form.login header {
+  color: #333; /* text color when deactivated */
+  opacity: 0.6; /* Make it slightly faded*/
+}
+
+/* header when the login form is focused*/
+.wrapper.active .form.login header {
+  opacity: 1; /* Make it fully visible */
+}
+
+/* header when the signup form is not focused*/
+.wrapper.active .signup header {
+    opacity: 0.6; /* Make it slightly faded*/
+}
+
+
+/* ==============================
+   FORM INPUTS AND ELEMENTS
+   ============================== */
+
+/* Styling the form */
+.wrapper form {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  gap: 20px; /* Space between form elements */
+  margin-top: 40px; /* Margin from top */
+}
+
+/* Styling form input fields */
+form input {
+  height: 60px; /* Height of the input */
+  outline: none; /* Remove the default outline */
+  border: none; /* Remove border */
+  padding: 0 15px; /* Add some padding */
+  font-size: 16px; /* Size of text */
+  font-weight: 400; /* Font weight */
+  color: #333; /* Text color */
+  border-radius: 8px; /* Rounded corners */
+  background: #fff; /* White background */
+}
+
+/* Styling form input fields in the login form*/
+.form.login input {
+  border: 1px solid #aaa; /* Add border */
+}
+
+/* Styling input field when it is focused*/
+.form.login input:focus {
+  box-shadow: 0 1px 0 #ddd; /* Add shadow when focused */
+}
+
+/* Styling the checkbox container */
+form .checkbox {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Space between elements*/
+}
+
+/* Styling the checkbox */
+.checkbox input[type="checkbox"] {
+  height: 16px; /* Height */
+  width: 16px; /* Width */
+  accent-color: #fff; /* Color of checkbox */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Styling the checkbox label */
+form .checkbox label {
+  cursor: pointer; /* Change cursor on hover */
+  color: #fff; /* Label text color */
+}
+
+/* Styling form links */
+form a {
+  color: #333; /* Link color */
+  text-decoration: none; /* Remove underline from link */
+}
+
+/* Styling links on hover */
+form a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/* Styling submit buttons */
+form input[type="submit"] {
+  margin-top: 15px; /* Margin from top */
+  padding: none; /* remove any padding */
+  font-size: 18px; /* Text size */
+  font-weight: 500; /* Text weight */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Styling the submit button when its in the login form*/
+.form.login input[type="submit"] {
+  background: #4070f4; /* background color*/
+  color: #fff; /* White text color */
+  border: none; /* remove border */
+}
