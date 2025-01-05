@@ -367,9 +367,13 @@
                        <div class="card">
                            <h3><i class="fas fa-dumbbell"></i> Workouts</h3>
                              <ul>
-                            {% for i in workout %}
-                                 <li> <i class="fas fa-running"></i>{{ i }}</li>
-                             {% endfor %}
+                              {% if workout %}
+                                {% for i in workout %}
+                                  <li> <i class="fas fa-running"></i>{{ i }}</li>
+                                 {% endfor %}
+                               {% else %}
+                                   <p>No workouts available.</p>
+                              {% endif %}
                              </ul>
                         </div>
                         <div class="card">
@@ -402,9 +406,13 @@
                          <div class="card">
                             <h3> <i class="fas fa-apple-alt"></i> Diets</h3>
                              <ul>
-                                 {% for i in my_diet %}
-                                      <li><i class="fas fa-utensils"></i> {{ i }}</li>
-                                 {% endfor %}
+                              {% if my_diet %}
+                                {% for i in my_diet %}
+                                  <li><i class="fas fa-utensils"></i> {{ i }}</li>
+                                {% endfor %}
+                              {% else %}
+                                   <p>No diet recomendations available.</p>
+                               {% endif %}
                             </ul>
                          </div>
 
@@ -492,9 +500,13 @@
                </div>
                <div class="modal-body">
                     <ul>
-                      {% for i in workout %}
-                         <li> <i class="fas fa-running"></i>{{ i }}</li>
-                      {% endfor %}
+                        {% if workout %}
+                           {% for i in workout %}
+                             <li> <i class="fas fa-running"></i>{{ i }}</li>
+                          {% endfor %}
+                         {% else %}
+                                <p>No workouts available.</p>
+                         {% endif %}
                     </ul>
                 </div>
             </div>
@@ -511,9 +523,13 @@
               </div>
                <div class="modal-body">
                     <ul>
-                      {% for i in my_diet %}
-                           <li><i class="fas fa-utensils"></i> {{ i }}</li>
-                      {% endfor %}
+                        {% if my_diet %}
+                           {% for i in my_diet %}
+                              <li><i class="fas fa-utensils"></i> {{ i }}</li>
+                            {% endfor %}
+                          {% else %}
+                                <p>No diet recomendations available.</p>
+                          {% endif %}
                   </ul>
                </div>
            </div>
